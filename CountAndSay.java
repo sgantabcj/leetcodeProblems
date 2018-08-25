@@ -2,9 +2,11 @@ package leetcode;
 
 public class CountAndSay {
     public static void main(String[] args){
-        int input = 5;
+        int input = 50;
         CountAndSaySolution sol = new CountAndSaySolution();
         System.out.println(input + " element in count and say sequence is: "+sol.countAndSay(input));
+        OptimalCountAndSaySolution sol1 = new OptimalCountAndSaySolution();
+        System.out.println("using optimal solution: "+sol1.countAndSay(input));
     }
 }
 class CountAndSaySolution {
@@ -45,39 +47,39 @@ class CountAndSaySolution {
 
         return retVal;
     }
+}
 
-    class optimalCountAndSaySolution{
-        public String countAndSay(int n) {
-            String str = "1";
-            while(n>1){
-                n--;
-                str = countAndSayString(str);
-            }
-            return str;
+class OptimalCountAndSaySolution{
+    public String countAndSay(int n) {
+        String str = "1";
+        while(n>1){
+            n--;
+            str = countAndSayString(str);
         }
+        return str;
+    }
 
-        public String countAndSayString(String str){
-            char[] chars = str.toCharArray();
-            StringBuilder sb = new StringBuilder();
-            int i=0;
-            while(i<chars.length){
-                int count=1;
+    public String countAndSayString(String str){
+        char[] chars = str.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        int i=0;
+        while(i<chars.length){
+            int count=1;
 
-                if(i+1<chars.length){
-                    while(chars[i+1]==chars[i]){
-                        i++;
-                        count++;
-                        if(i==chars.length-1) break;
-                    }
+            if(i+1<chars.length){
+                while(chars[i+1]==chars[i]){
+                    i++;
+                    count++;
+                    if(i==chars.length-1) break;
                 }
-
-
-                char countChar = (char) (count+'0');
-                sb.append(countChar);
-                sb.append(chars[i]);
-                i++;
             }
-            return sb.toString();
+
+
+            char countChar = (char) (count+'0');
+            sb.append(countChar);
+            sb.append(chars[i]);
+            i++;
         }
+        return sb.toString();
     }
 }
